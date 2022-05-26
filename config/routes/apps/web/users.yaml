@@ -1,0 +1,4 @@
+list:
+    path: /
+    controller: App\Apps\Web\Users\ListUserController
+    methods: GET

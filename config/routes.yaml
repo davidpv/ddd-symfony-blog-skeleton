@@ -1,0 +1,21 @@
+kernel:
+    resource: ../src/Kernel.php
+    type: annotation
+
+homepage:
+    path: /
+    controller: App\Apps\Web\Homepage\HomepageController
+    methods: GET
+
+
+api.v1:
+    resource: 'routes/apps/api/v1.yaml'
+    prefix: /api/v1
+    trailing_slash_on_root: false
+    name_prefix: 'api.v1.'
+
+web.v1:
+    resource: 'routes/apps/web/index.yaml'
+    prefix: /web
+    trailing_slash_on_root: false
+    name_prefix: 'web.'

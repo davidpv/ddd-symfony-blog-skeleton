@@ -1,0 +1,9 @@
+list:
+    path: /
+    controller: App\Apps\Api\Posts\ListPostController
+    methods: GET
+
+get:
+    path: /{id}
+    controller: App\Apps\Api\Posts\GetPostController
+    methods: GET

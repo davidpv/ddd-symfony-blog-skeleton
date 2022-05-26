@@ -1,0 +1,5 @@
+services:
+
+    App\Apps\Console\Users\CreateUserCommand:
+        tags:
+            - { name: 'console.command', command: 'app:create-user' }

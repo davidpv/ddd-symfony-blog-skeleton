@@ -1,0 +1,11 @@
+users:
+    resource: 'v1/users.yaml'
+    prefix: '/users'
+    trailing_slash_on_root: false
+    name_prefix: 'users.'
+
+posts:
+    resource: 'v1/posts.yaml'
+    prefix: '/posts'
+    trailing_slash_on_root: false
+    name_prefix: 'posts.'

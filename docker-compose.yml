@@ -1,0 +1,50 @@
+version: '3.5'
+
+services:
+
+    nginx:
+        container_name: ${NGINX_CONTAINER_NAME}
+        image: ${NGINX_CONTAINER_NAME}
+        build:
+            context: ./docker/nginx
+            args:
+                UID: $UID
+                NGINX_VERSION: $NGINX_VERSION
+        ports:
+            - "80:80"
+        volumes:
+            - ./:/var/www
+        depends_on:
+            - php
+
+    php:
+        container_name: ${PHP_CONTAINER_NAME}
+        image: ${PHP_CONTAINER_NAME}
+        build:
+            context: docker/php
+            args:
+                UID: $UID
+                SYMFONY_VERSION: $SYMFONY_VERSION
+                PHP_VERSION: $PHP_VERSION
+        environment:
+            XDEBUG_CONFIG: "mode=debug client_host=host.docker.internal client_port=9003 start_with_request=yes"
+            PHP_IDE_CONFIG: "serverName=localhost"
+        volumes:
+            - ./:/var/www
+            - ./docker/php/xdebug.ini:/usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini:delegated
+    ###> doctrine/doctrine-bundle ###
+    database:
+        container_name: ${DB_CONTAINER_NAME}
+        image: mariadb:${MARIADB_VERSION:-10.6}
+        environment:
+            MARIADB_USER: ${MARIADB_USER:-dbuser}
+            MARIADB_PASSWORD: ${MARIADB_PASSWORD:-dbuser}
+            MARIADB_ROOT_PASSWORD: ${MARIADB_PASSWORD:-root}
+            MYSQL_DATABASE: ${MARIADB_DATABASE:-app}
+        ports:
+            - "3306:3306"
+    ###< doctrine/doctrine-bundle ###
+
+    mailer:
+        image: schickling/mailcatcher
+        ports: [1025, 1080]

@@ -1,0 +1,9 @@
+list:
+    path: /
+    controller: App\Apps\Api\Users\ListUserController
+    methods: GET
+
+create:
+    path: /
+    controller: App\Apps\Api\Users\CreateUserController
+    methods: POST

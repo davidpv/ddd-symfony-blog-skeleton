@@ -1,0 +1,5 @@
+services:
+
+    App\Apps\Api\:
+        resource: '../../src/Apps/Api/*'
+        tags: [ 'controller.service_arguments' ]

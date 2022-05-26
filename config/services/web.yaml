@@ -1,0 +1,4 @@
+services:
+    App\Apps\Web\:
+        resource: '../../src/Apps/Web/'
+        tags: [ 'controller.service_arguments' ]
